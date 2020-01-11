@@ -14,23 +14,27 @@
 	],
 	"main": "./out/extension.js",
 	"contributes": {
-		"commands": [{
-			"command": "extension.helloWorld",
-			"title": "Hello World"
-		}],
-		"keybindings": [
+		"commands": [
 			{
-					"command": "extension.helloWorld",
-					"key": "ctrl+f10",
-					"mac": "cmd+f10",
-					"when": "editorTextFocus"
+				"command": "extension.helloWorld",
+				"title": "Hello World"
+			},
+			{
+				"command": "extension.demo.getCurrentFilePath",
+				"title": "getCurrentFilePath"
 			}
 		],
 		"menus": {
 			"editor/context": [
 					{
 							"when": "editorFocus",
-							"command": "extension.helloWorld",
+							"command": "extension.demo.getCurrentFilePath",
+							"group": "navigation"
+					}
+			],
+			"explorer/context": [
+					{
+							"command": "extension.demo.getCurrentFilePath",
 							"group": "navigation"
 					}
 			]

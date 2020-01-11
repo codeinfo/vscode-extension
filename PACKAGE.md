@@ -196,7 +196,7 @@
         "homepage": "https://github.com/sxei/vscode-plugin-demo/blob/master/README.md"
     }
 
-# activationEvents
+## activationEvents
 
     onLanguage:${language}
     onCommand:${command}
@@ -207,7 +207,7 @@
     onUri
     *
 
-# contributes
+## contributes
 
     configuration：设置
     commands：命令
@@ -226,3 +226,65 @@
     problemPatterns
     taskDefinitions
     colors
+
+## menu 配置下
+
+    editor/title是key值，定义这个菜单出现在哪里；
+    when控制菜单合适出现；
+    command定义菜单被点击后要执行什么操作；
+    alt定义备用命令，按住alt键打开菜单时将执行对应命令；
+    group定义菜单分组；
+
+### 菜单出现位置
+
+    资源管理器上下文菜单 - explorer/context
+    编辑器上下文菜单 - editor/context
+    编辑标题菜单栏 - editor/title
+    编辑器标题上下文菜单 - editor/title/context
+    调试callstack视图上下文菜单 - debug/callstack/context
+    SCM标题菜单 -scm/title
+    SCM资源组菜单 -scm/resourceGroup/context
+    SCM资源菜单 -scm/resource/context
+    SCM更改标题菜单 -scm/change/title
+    左侧视图标题菜单 -view/title
+    视图项菜单 -view/item/context
+    控制命令是否显示在命令选项板中 - commandPalette
+
+### 右键菜单分组
+
+    ### editor/context
+    navigation- 放在这个组的永远排在最前面；
+    1_modification - 更改组；
+    2_workspace - 与工作空间操作相关的命令。
+    9_cutcopypaste - 编辑组
+    z_commands - 最后一个默认组，其中包含用于打开命令选项板的条目
+
+    ### explorer/context
+    navigation - 放在这个组的永远排在最前面；
+    2_workspace - 与工作空间操作相关的命令。
+    3_compare - 与差异编辑器中的文件比较相关的命令。
+    4_search - 与在搜索视图中搜索相关的命令。
+    5_cutcopypaste - 与剪切，复制和粘贴文件相关的命令。
+    7_modification - 与修改文件相关的命令。
+
+    ### 编辑器选项卡上下文菜单
+    1_close - 与关闭编辑器相关的命令。
+    3_preview - 与固定编辑器相关的命令。
+
+    ### editor/title
+    1_diff - 与使用差异编辑器相关的命令。
+    3_open - 与打开编辑器相关的命令。
+    5_close - 与关闭编辑器相关的命令。
+
+### 资源转换
+
+    /**
+	 * 获取某个扩展文件相对于webview需要的一种特殊路径格式
+	 * 形如：vscode-resource:/Users/toonces/projects/vscode-cat-coding/media/cat.gif
+	 * @param context 上下文
+	 * @param relativePath 扩展中某个文件相对于根目录的路径，如 images/test.jpg
+	 */
+	getExtensionFileVscodeResource: function(context, relativePath) {
+		const diskPath = vscode.Uri.file(path.join(context.extensionPath, relativePath));
+		return diskPath.with({ scheme: 'vscode-resource' }).toString();
+	}

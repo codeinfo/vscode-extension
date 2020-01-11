@@ -2,6 +2,7 @@
 	"name": "helloworld",
 	"displayName": "HelloWorld",
 	"description": "test",
+	"publisher": "nanye",
 	"version": "0.0.1",
 	"engines": {
 		"vscode": "^1.41.0"
@@ -21,6 +22,10 @@
 			},
 			{
 				"command": "extension.demo.getCurrentFilePath",
+				"title": "getCurrentFilePath"
+			},
+			{
+				"command": "extension.testEditorCommand",
 				"title": "getCurrentFilePath"
 			}
 		],

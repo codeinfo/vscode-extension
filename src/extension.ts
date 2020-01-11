@@ -33,6 +33,30 @@ export function activate(context: vscode.ExtensionContext) {
 		vscode.window.showInformationMessage(`当前文件(夹)路径是：${uri ? uri.path : '空'}`);
 	}));
 
+	// 编辑器命令
+	context.subscriptions.push(vscode.commands.registerTextEditorCommand('extension.testEditorCommand', (textEditor, edit) => {
+		console.log('您正在执行编辑器命令！');
+		console.log(textEditor, edit);
+	}));
+
+	// 获取所有命令
+	vscode.commands.getCommands().then(allCommands => {
+		console.log('所有命令：', allCommands);
+	});
+	
+	context.subscriptions.push(vscode.commands.registerCommand('extension.demo.openWebview', function (uri) {
+    // 创建webview
+    const panel = vscode.window.createWebviewPanel(
+        'testWebview', // viewType
+        "WebView演示", // 视图标题
+        vscode.ViewColumn.One, // 显示在编辑器的哪个部位
+        {
+            enableScripts: true, // 启用JS，默认禁用
+            retainContextWhenHidden: true, // webview被隐藏时保持状态，避免被重置
+        }
+    );
+		panel.webview.html = `<html><body>你好，我是Webview</body></html>`;
+	}));
 	
 }
 
